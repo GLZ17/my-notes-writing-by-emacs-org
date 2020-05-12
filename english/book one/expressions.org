@@ -28,3 +28,31 @@
    | police dog    | 警犬         |
    | post office   | 邮局         |
    |---------------+--------------|
+
+** 9
+   |-----------------------------------+------------------------|
+   | How are you?                      | 你还好吗               |
+   | How are you doing?                | 你还好吗               |
+   | How is your mother?               | 你的妈妈还好吗         |
+   | How is the weather?               | 天气怎么样             |
+   | How are They?                     | 他们怎么样             |
+   | Not bad.                          | 还凑合，不差           |
+   | very bad.                         | 特别不好               |
+   | Terrible                          | 很糟糕                 |
+   | a fat cat                         | 暴发户                 |
+   | a little heavy                    | 有点重（胖），有点发福 |
+   | You are so slim                   | 你好苗条               |
+   | It is hot today                   | 今天天气很热           |
+   | The girl is very hot              | 那女孩很性感           |
+   | Lady GaGa is hot now              | ...现在很火            |
+   | It is very cold today             | 今天天气很冷           |
+   | I have a cold welcome             | 我受到了冷遇           |
+   | He is an old man                  | 他是一个位老人         |
+   | It is an old story                | 这是一个老故事         |
+   | That is my old book               | 那是我的旧书           |
+   | Hi is a young man                 | 他是一个年轻人         |
+   | It is a busy day                  | 真是忙碌的一天         |
+   | He is very busy                   | 他特别的忙             |
+   | I see him in the street           | 我在街上看见他了       |
+   | Look at that man. He is very busy | 看，那个人特别忙       |
+   |-----------------------------------+------------------------|

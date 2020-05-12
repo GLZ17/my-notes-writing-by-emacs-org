@@ -19,8 +19,18 @@
    - take name fate
    - nose hope
    - cute
+** qu
+   - quit
+   - queen
+   - quiet
 
 * 发音不一样
 ** man
   - man woman
   - policeman milkman postman
+** the
+   - the student
+   - the Italian
+
+* 连读
+  - look at
