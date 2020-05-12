@@ -1,0 +1,168 @@
+* 基本流程
+#+BEGIN_SRC php
+  $db_info = [
+      '127.0.0.1',
+      'root',
+      ''
+  ];
+  // @不显示错误提示
+  // 错误退出程序
+  !($link = @mysqli_connect(...$db_info)) && exit('connect failure');
+
+  // 设置字符集
+  !mysqli_set_charset($link, 'utf8') && die('set charset failure');
+
+  // 选择数据库
+  !mysqli_select_db($link, 'db1') && die('select db failure');
+
+  // 执行SQL语句
+  // 获取查询结果（如果有的话）
+  // 释放查询结果
+  // ......
+  // ......
+
+  // 关闭连接
+  mysqli_close($link);
+#+END_SRC
+* 获取数据
++ 失败都是返回 false
++ 成功 select/show/description 语句返回结果对象，其他返回 true
+** 执行SQL语句
+#+BEGIN_SRC sql
+  -- 测试数据（使用3条）
+  MariaDB [db1]> select * from student limit 3;
+  +----+-------+--------+------+--------+-----------+--------+------+
+  | id | name  | gender | age  | edu    | salary    | bonus  | addr |
+  +----+-------+--------+------+--------+-----------+--------+------+
+  |  1 | 学生1 | 男     |   75 | 研究生 |  39537.75 | 1764.8 | YC   |
+  |  2 | 学生2 | 男     |   71 | 初中   |  14928.75 |  160.8 | GT   |
+  |  3 | 学生3 | 女     |   74 | 硕士   | 144182.25 | 1039.2 | UW   |
+  +----+-------+--------+------+--------+-----------+--------+------+
+#+END_SRC
+#+BEGIN_SRC php
+  // 连接、设置字符集、选择数据库
+  // 执行SQL语句
+  !($result = mysqli_query($link, 'select * from student limit 2;')) && exit('query failure');
+
+  // 有好几种方式获取数据
+  // 单独举例
+  // ......
+  // ......
+
+  // 释放查询结果
+  mysqli_free_result($result);
+#+END_SRC
+** 获取数据
+*** 一次一条数据
+**** 下标方式
+#+BEGIN_SRC php
+  while ($arr = mysqli_fetch_row($result)){
+      print_r($arr);
+  }
+
+  // (
+  //     [0] => 1
+  //     [1] => 学生1
+  //     [2] => 男
+  //     [3] => 75
+  //     [4] => 研究生
+  //     [5] => 39537.75
+  //     [6] => 1764.8
+  //     [7] => YC
+  // )
+#+END_SRC
+**** 索引方式
+#+BEGIN_SRC php
+  while ($arr = mysqli_fetch_assoc($result)){
+      print_r($arr);
+  }
+
+  // (
+  //     [id] => 1
+  //     [name] => 学生1
+  //     [gender] => 男
+  //     [age] => 75
+  //     [edu] => 研究生
+  //     [salary] => 39537.75
+  //     [bonus] => 1764.8
+  //     [addr] => YC
+  // )
+#+END_SRC
+**** 通用方式
+#+BEGIN_SRC sql
+  //define ('MYSQLI_NUM', 2); 下标
+  //define ('MYSQLI_ASSOC', 1); 索引
+  //define ('MYSQLI_BOTH', 3); 都有（默认）
+  while ($arr = mysqli_fetch_array($result,3)){
+      print_r($arr);
+  }
+
+  -- (
+  --     [0] => 1
+  --     [id] => 1
+  --     [1] => 学生1
+  --     [name] => 学生1
+  --     [2] => 男
+  --     [gender] => 男
+  --     [3] => 75
+  --     [age] => 75
+  --     [4] => 研究生
+  --     [edu] => 研究生
+  --     [5] => 39537.75
+  --     [salary] => 39537.75
+  --     [6] => 1764.8
+  --     [bonus] => 1764.8
+  --     [7] => YC
+  --     [addr] => YC
+  -- )
+#+END_SRC
+*** 一次全部获取
+数据太大这方式不适用
+#+BEGIN_SRC php
+  //define ('MYSQLI_NUM', 2); 下标
+  //define ('MYSQLI_ASSOC', 1); 索引
+  //define ('MYSQLI_BOTH', 3); 都有（默认）
+  print_r(mysqli_fetch_all($result, MYSQLI_BOTH));
+
+  // 二维数组
+  // Array
+  // (
+  //     [0] => Array
+  //         (
+  //             [0] => 1
+  //             [id] => 1
+  //             [1] => 学生1
+  //             [name] => 学生1
+  //             [2] => 男
+  //             [gender] => 男
+  //             [3] => 75
+  //             [age] => 75
+  //             [4] => 研究生
+  //             [edu] => 研究生
+  //             [5] => 39537.75
+  //             [salary] => 39537.75
+  //             [6] => 1764.8
+  //             [bonus] => 1764.8
+  //             [7] => YC
+  //             [addr] => YC
+  //         )
+  //     ......
+  // )
+#+END_SRC
+
+** 记录总数
+*** 查询到的数据记录总数
+#+BEGIN_SRC php
+  //查询记录个数
+  //一般用在查询语句
+  $records = mysqli_num_rows($result);
+  print_r($records); // n
+#+END_SRC
+*** 影响的记录总数
+#+BEGIN_SRC php
+  //影响的记录个数
+  //一般用于删除或修改
+  //表达式例子：update tb1 set age = age + 1 where id = 3;
+  $num = mysqli_affected_rows($link);
+  var_dump($sum);
+#+END_SRC

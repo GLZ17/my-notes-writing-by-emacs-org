@@ -1,0 +1,20 @@
+* 下载
+到 [[composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/][官网]] 下载，选择手动下载（这种方式比较靠谱，底部有版本可以选择）
+* 初始化
+1. 将下载到的 composer.phar 文件放到对应的 path 目录中（PHP路径下）
+2. 创建执行脚本composer.bat，内容为：@php "%~dp0composer.phar" %* (命令：echo @php "%~dp0composer.phar" %*>composer.bat）
+3. 测试 composer -V
+
+* 设置源
+使用阿里源
+#+BEGIN_SRC shell
+  composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+#+END_SRC
+
+* 包下载地址
++ https://packagist.org/packages/topthink/think
+* 创建项目
+打包创建
+#+BEGIN_SRC shell
+  composer create-project --prefer-dist topthink/think tp-name
+#+END_SRC

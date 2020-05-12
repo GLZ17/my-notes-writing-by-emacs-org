@@ -1,0 +1,298 @@
+* 说明
+- echo $v不能输出数据的集合（例如数组）
+- print_r($v) 输入数据
+- var_dump($v) 输出类型和值
+- die/exit[$v] 终止程序（退出）
+* 变量
+** 定义
+#+BEGIN_SRC php
+  $name = "我擦";
+#+END_SRC
+#+BEGIN_SRC shell
+  C:\wamp64\www\test>php base.php
+  我擦
+#+END_SRC
+** 解析
+推荐使用单引号，不会转义
+#+BEGIN_SRC php
+  C:\wamp64\www\test>php base.php
+  string(14) "我擦---twice"
+#+END_SRC
+
+* 常量
+** 定义
+#+BEGIN_SRC php
+  define('SERVER_SITE', 'https://www.baidu.com');
+#+END_SRC
+#+BEGIN_SRC shell
+  C:\wamp64\www\test>php base.php
+  https://www.baidu.com
+#+END_SRC
+* 数组
+** 定义
+老版本使array()
+#+BEGIN_SRC php
+  $arr = [
+      'A',
+      'H' => '2',
+      10 => 'aaa',
+      'A'
+  ];
+#+END_SRC
+#+BEGIN_SRC shell
+  C:\wamp64\www\test>php base.php
+  Array
+  (
+      [0] => A
+      [H] => 2
+      [10] => aaa
+      [11] => A
+  )
+#+END_SRC
+** 遍历
+$k 不是必须的
+#+BEGIN_SRC php
+  foreach ($arr as $k=>$v){
+      print_r($k.'---'.$v."\n");
+  }
+#+END_SRC
+#+BEGIN_SRC shell
+  C:\wamp64\www\test>php base.php
+  0---A
+  H---2
+  10---aaa
+  11---A
+#+END_SRC
+** html中php的遍历
+- 分号相当于{
+- endforeach相当于}
+- 遍历多行分开写（仅看起来有点奇怪罢了）
+#+BEGIN_SRC php
+  <ul class="nav">
+      <li><a href="/">首页</a></li>
+      <?php foreach ($list as $it) :?>
+      <li><a href=""><?php echo $it;?></a></li>
+      <?php endforeach;?>
+  </ul>
+#+END_SRC
+** 结合html使用例子
+#+BEGIN_SRC php
+  <ul>
+      <?php
+      $course = ['C++', 'PHP', 'JAVA', 'Rust'];
+      foreach ($course as $it){
+	  print_r('<li>'.$it.'</li>');
+      }
+      ?>
+  </ul>
+#+END_SRC
+* 三元运算
+- $a ?? $b: isset($a) ? $a : $b;
+- $a ?: $b: $a ? $a : $b;
+
+* 导航交互例子
+点击导航切换不同类别内容（类别ID作为参数）
+** 完整静态页面
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Title</title>
+      <link rel="stylesheet" href="static/reset.css">
+      <link rel="stylesheet" href="static/page.css">
+  </head>
+  <body class="root">
+  <header class="top fixed">
+      <ul class="nav">
+	  <li><a href="base.html">首页</a></li>
+	  <li><a href="">静态网页</a></li>
+	  <li><a href="">后端开发</a></li>
+	  <li><a href="">云服务器</a></li>
+      </ul>
+  </header>
+  <main class="main">
+      <div>
+	  <h3>静态网页</h3>
+	  <ul>
+	      <li><a href="">1</a></li>
+	      <li><a href="">2</a></li>
+	      <li><a href="">3</a></li>
+	  </ul>
+      </div>
+  </main>
+  <footer class="fixed footer"></footer>
+  </body>
+  </html>
+#+END_SRC
+** 主要的样式
+- 响应式布局
+- 网格布局
+#+BEGIN_SRC css
+  @media screen and (min-width: 980px) {
+      body {
+	  width: 7.5rem;
+	  margin: 0 auto;
+      }
+
+      html {
+	  font-size: calc(750px / 7.5);
+      }
+  }
+
+  @media screen  and (max-width: 980px) {
+      html {
+	  font-size: calc(100vw / 7.5);
+      }
+  }
+
+  body {
+      min-height: 100vh;
+      padding: 0.46rem 0 0.5rem;
+      background-color: #EAA90B;
+      font-size: 0.28rem;
+  }
+
+  .fixed {
+      position: fixed;
+      width: inherit;
+  }
+
+  .top {
+      height: 0.46rem;
+      background-color: #4FEF10;
+      top: 0;
+  }
+
+  .footer {
+      height: 0.5rem;
+      background-color: #00b3ff;
+      bottom: 0;
+  }
+
+  .top .nav {
+      height: inherit;
+      display: grid;
+      grid-template-columns: repeat(4, 1.5rem);
+      place-items: center;
+  }
+#+END_SRC
+** 分割关键的php
+- 系统分隔符
+- 文件引入
+- 字符串拼接
+*** 入口文件
+#+BEGIN_SRC php
+  echo <<<'header'
+  <head>
+      <meta charset="UTF-8">
+      <title>Title</title>
+      <link rel="stylesheet" href="tp/static/reset.css">
+      <link rel="stylesheet" href="tp/static/page.css">
+  </head>
+  <body class="root">
+  <header class="top fixed">
+      <ul class="nav">
+  header;
+  $pre = __DIR__.DIRECTORY_SEPARATOR.'tp'.DIRECTORY_SEPARATOR;
+  $fn = require $pre.'nav.php';
+  $fn();
+  echo <<< 'nav'
+      </ul>
+  </header>
+  <main class="main">
+  nav;
+  $fn = require $pre.'main.php';
+  $fn();
+  echo <<< 'footer'
+  </main>
+  <footer class="fixed footer"></footer>
+  </body>
+  </html>
+  footer;
+#+END_SRC
+*** nav.php
+#+BEGIN_SRC php
+  return function () {
+      $data = require(__DIR__ . DIRECTORY_SEPARATOR.'data.php');
+      $nav = $data['nav'];
+      $category = $data['category'];
+      echo '<li><a href="/tp.php">首页</a></li>';
+      foreach ($nav as $ix => $it) {
+	  $cid = $it['cid'];
+	  echo <<< "I"
+  <li><a href="?cid={$cid}">{$category[$cid]}</a></li>
+  I;
+      }
+  };
+#+END_SRC
+*** data.php
+#+BEGIN_SRC php
+  return [
+      'category' => [
+	  1000 => '静态网页',
+	  1100 => '后端开发',
+	  1200 => '云服务器'
+      ],
+      'nav' => [
+	  '1000' => [
+	      'cid' => '1000',
+	      'path' => 'static.php',
+	      'list' => ['html', 'css', 'js']
+	  ]
+      ]
+  ];
+#+END_SRC
+** 单一页面写法
+#+BEGIN_SRC php
+  <?php
+  // 生成数据格式
+  define('DS', DIRECTORY_SEPARATOR);
+  $data = require(__DIR__ .DS.'tp'.DS.'data.php');
+  $nav = $data['nav'];
+  $category = $data['category'];
+  $list = $nav[$_GET['cid'] ?? null] ?? null;
+  $list = $list ? [$list] : $nav;
+  ?>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Title</title>
+      <link rel="stylesheet" href="tp/static/reset.css">
+      <link rel="stylesheet" href="tp/static/page.css">
+  </head>
+  <body class="root">
+  <header class="top fixed">
+  <ul class="nav">
+      <li><a href="?">首页</a></li>
+      <?php foreach ($nav as $it) :?>
+      <li><a href="?cid=<?php echo $it['cid'];?>"><?php echo $category[$it['cid']];?></a></li>
+      <?php endforeach;?>
+  </ul>
+  </header>
+  <main class="main">
+      <?php foreach ($list as $item):?>
+      <div>
+	  <h3>静态网页</h3>
+	  <ul>
+	      <?php foreach ($item['list'] as $it) : ?>
+	      <li><a href=""><?php echo $it;?></a></li>
+	      <?php endforeach;?>
+	  </ul>
+      </div>
+      <?php endforeach;?>
+  </main>
+  <footer class="fixed footer"></footer>
+  </body>
+  </html>
+#+END_SRC
+* 判断数据类型
++ is_numeric() 是否位数字
++ is_null()
++ is_bool()
+* 逻辑判断
+- $a and $b: $a && $b 同时为true
+- $a or $b: $a || $b 有true就行
+- $a xor $b: 仅有一个是true，结果才是true
+- !$a 取反
