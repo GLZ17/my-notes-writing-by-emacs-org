@@ -1,51 +1,51 @@
 * 文件目录操作的一些函数
-Windows系统文件目录权限相关的基本都是有问题的，不考虑
-+ mkdir 0777 创建目录
-+ is_dir 
-+ is_file 
-+ file_exist file/dir
-+ chmod
-+ fileperms 获取权限
-+ rename
-+ opendir
-+ readdir
-+ closedir
-#+BEGIN_SRC php
-  //遍历整个文件夹
-  function traverse($pathname)
-  {
-      if (!file_exists($pathname)) {
-	  return false;
-      }
-      $find_all = function ($str) use (&$find_all) {
-	  echo '<ul>';
-	  if (is_dir($str)) {
-	      $resource = opendir($str);
-	      while ($data = readdir($resource)) {
-		  if ($data !== '.' && $data != '..') {
-		      echo "<li>{$str}</li>";
-		      $pathname = $str . DIRECTORY_SEPARATOR . $data;
-		      $find_all($pathname);
-		  }
-	      }
-	      closedir($resource);
+  - Windows系统文件目录权限相关的基本都是有问题的，不考虑
+  - mkdir 0777 创建目录
+  - is_dir 
+  - is_file 
+  - file_exist file/dir
+  - chmod
+  - fileperms 获取权限
+  - rename
+  - opendir
+  - readdir
+  - closedir
+    #+BEGIN_SRC php
+      //遍历整个文件夹
+      function traverse($pathname)
+      {
+	  if (!file_exists($pathname)) {
+	      return false;
 	  }
-	  echo '</ul>';
-      };
-      if(is_file($pathname)){
-	  echo "<ul><li>$pathname</li></ul>";
-      }
-      else{
-	  $find_all($pathname);
+	  $find_all = function ($str) use (&$find_all) {
+	      echo '<ul>';
+	      if (is_dir($str)) {
+		  $resource = opendir($str);
+		  while ($data = readdir($resource)) {
+		      if ($data !== '.' && $data != '..') {
+			  echo "<li>{$str}</li>";
+			  $pathname = $str . DIRECTORY_SEPARATOR . $data;
+			  $find_all($pathname);
+		      }
+		  }
+		  closedir($resource);
+	      }
+	      echo '</ul>';
+	  };
+	  if(is_file($pathname)){
+	      echo "<ul><li>$pathname</li></ul>";
+	  }
+	  else{
+	      $find_all($pathname);
+	  }
+
       }
 
-  }
-
-  traverse('C:\sbcl');
-#+END_SRC
-+ fopen
-+ fclose
-+ fread 万能，可以读取二进制
+      traverse('C:\sbcl');
+    #+END_SRC
+  - fopen
+  - fclose
+  - fread 万能，可以读取二进制
 #+BEGIN_SRC php
   //字符集
   //数据库 utf8
