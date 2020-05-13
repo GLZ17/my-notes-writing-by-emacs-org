@@ -31,7 +31,7 @@
     Thank you very much.
    #+END_SRC
 
-** 5-6
+** 5
    #+BEGIN_SRC text
      Lesson 5 Nice to meet you
      Listen to the tap then answer this question.
@@ -68,3 +68,19 @@
      I am an engineer.
    #+END_SRC
 
+** 9
+   #+BEGIN_SRC text
+     Lession 9 How are you today
+     Listen to the tap then answer this question.
+     How is Emma?
+     Hello, Helen.
+     Hi, Steven.
+     How are you today?
+     I am very well, thank you. And you?
+     I am fine, thanks.
+     How is Tony?
+     He is fine, thanks. How is Emma?
+     She is very well, too, Helen.
+     Goodbye, Helen. Nice to see you.
+     Nice to see you, too, Steven. Goodbye.
+   #+END_SRC

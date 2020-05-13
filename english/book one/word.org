@@ -128,32 +128,48 @@
    |-------------+----+------------|
 
 ** 9
-   |---------+------+--------+---------------------+--------------+----------------|
-   | hello   | int. | 喂     |                     |              |                |
-   | hi      | int. | 嗨     |                     |              |                |
-   | how     | adv. | 怎样   |                     |              |                |
-   | today   | adv. | 今天   |                     | tonight      | 今晚           |
-   | well    | adj. | 身体好 |                     |              |                |
-   | fine    | adj. | 美好的 | 状况良好            |              |                |
-   | thanks  | int. | 谢谢   | thank you very much | thanks a lot | 非常感谢       |
-   | goodbye | int. | 再见   |                     | see you      | 下次见，回头见 |
-   | see     | v.   | 见     |                     |              |                |
-   |---------+------+--------+---------------------+--------------+----------------|
+   |---------+---------------------+------------------|
+   | hello   | int.                | 喂               |
+   | hi      | int.                | 嗨               |
+   | how     | adv.                | 怎样             |
+   | today   | adv.                | 今天             |
+   |         | tonight             | 今晚             |
+   | well    | adj.                | 身体好           |
+   | fine    | adj.                | 美好的，状况良好 |
+   | thanks  | int.                | 谢谢             |
+   |         | thank you very much | 非常感谢         |
+   |         | thanks a lot        | 多谢             |
+   | goodbye | int.                | 再见             |
+   |         | see you             | 下次见，回头见   |
+   | see     | v.                  | 见               |
+   |---------+---------------------+------------------|
 
 * 1
 ** 10
-   |-------+------+--------+------------------+------+----------------------|
-   | fat   | adj. | 胖的   |                  |      |                      |
-   | woman | n.   | 女人   |                  | lady | 女士（文明场合使用） |
-   | thin  | adj. | 瘦的   |                  |      |                      |
-   | tall  | adj. | 高的   | 人的个子、建筑等 |      |                      |
-   | short | adj. | 矮的   |                  |      |                      |
-   | dirty | adj. | 脏的   |                  |      |                      |
-   | clean | adj. | 干净的 |                  |      |                      |
-   | hot   | adj. | 热的   |                  |      |                      |
-   | cold  | adj. | 冷的   |                  |      |                      |
-   | old   | adj. | 老的   |                  |      |                      |
-   | young | adj. | 年轻的 |                  |      |                      |
-   | busy  | adj. | 忙的   |                  |      |                      |
-   | lazy  | adj. | 懒的   |                  |      |                      |
-   |-------+------+--------+------------------+------+----------------------|
+   |-------+-----------------------+--------------------------|
+   | fat   | adj.                  | 胖的                     |
+   | woman | n.                    | 女人                     |
+   |       | lady                  | 女士（文明场合使用）     |
+   | thin  | adj.                  | 瘦的                     |
+   | tall  | adj.                  | 高的（人的个子、建筑等） |
+   | short | adj.                  | 矮的                     |
+   | dirty | adj.                  | 脏的                     |
+   | clean | adj.                  | 干净的                   |
+   | hot   | adj.                  | 热的                     |
+   |       | It is hot today       | 今天天气很热             |
+   |       | The girl is very hot  | 那女孩很性感             |
+   |       | Lady GaGa is hot now  | ...现在很火              |
+   | cold  | adj.                  | 冷的                     |
+   |       | It is very cold today | 今天天气很冷             |
+   |       | I have a cold welcome | 我受到了冷遇             |
+   | old   | adj.                  | 老的                     |
+   |       | He is an old man      | 他是一个位老人           |
+   |       | It is an old story    | 这是一个老故事           |
+   |       | That is my old book   | 那是我的旧书             |
+   | young | adj.                  | 年轻的                   |
+   |       | Hi is a young man     | 他是一个年轻人           |
+   | busy  | adj.                  | 忙的                     |
+   |       | It is a busy day      | 真是忙碌的一天           |
+   |       | He is very busy       | 他特别的忙               |
+   | lazy  | adj.                  | 懒的                     |
+   |-------+-----------------------+--------------------------|
