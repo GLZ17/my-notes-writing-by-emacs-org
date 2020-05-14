@@ -103,7 +103,34 @@
       //当前访问页面的绝对路径
       var_dump(getcwd());
     #+END_SRC
-
+** 上传文件
+   - 客户端
+     - method="post"
+     - enctype="multipart/form-data"
+     - <input name="token" value="...." type="hidden">
+     - 多个文件注意点
+       - <input type="file" name="fs[]"/>
+       
+   - 服务器
+     - $_FILES 文件信息
+       - 临时文件、错误状态、源文件名称之类的
+       - 多个文件和单个文件格式时不一样的
+     - is_uploaded_file 上传状态判断
+     - 拼接文件名称（避免重复覆盖）
+     - move_uploaded_file 保存文件（移动文件）
+     #+BEGIN_SRC php
+       //    文件信息，多个文件和单个文件格式时不一样的
+       //    print_r($_FILES);
+	   $ext = 'jpg';
+       //    echo date('Ymdhis', time()) . md5(time()) . '.' . $ext;
+	   if (is_uploaded_file('./tmp')) {
+	       if (move_uploaded_file('./temp', './dest')) {
+		   echo 'perms deny!';
+	       }
+	   } else {
+	       echo 'upload failure!';
+	   }
+     #+END_SRC
 * oop
 ** class
    - 接口是类的模板
@@ -701,43 +728,92 @@
    #+END_SRC
 
 * db
-  - 推荐pdo（PHP数据对象，数据库统一接口）
-  - mysqli库之类的库（不同数据库使用不同的库）
-  - pdo中尽量使用预处理减少注入
-  - pdo基本使用例子
-    #+BEGIN_SRC php
-      $driver = 'mysql';
-      $host = '127.0.0.1';
-      $port = 3306;
-      $db_name = 'db1';
-      $charset = 'utf8';
-      $username = 'root';
-      $password = '';
-      $dsn = "{$driver}:$host;port={$port};dbname={$db_name};charset=${charset}";
-      try {
-	  $pdo = new PDO($dsn, $username, $password);
-      //print_r($pdo);
-      //使用异常形式来提示错误
-	  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	  $sql = "insert into user (name ,password) values (:name, :password);";
-      //    使用预处理方式执行sql
-	  $sth = $pdo->prepare($sql);
-      //    会过滤一些字符串类似注入之类的
-	  $sth->bindValue(':name', '小李');
-	  $sth->bindValue(':password', 'hello');
-	  $sth->execute();
-	  var_dump('exec success');
-	  var_dump($pdo->lastInsertId('id'));
-	  $sql = "select * from user order by id desc limit 0, 1;";
-	  $data = $pdo->query($sql);
-	  var_dump($data->fetchAll(PDO::FETCH_ASSOC));
-      } catch (Exception $e) {
-	  print_r($e->getMessage());
-      //    var_dump($pdo->errorInfo());
-      //    var_dump($pdo->errorCode());
-      }
-    #+END_SRC
+** 基本使用
+   - 推荐pdo（PHP数据对象，数据库统一接口）
+   - mysqli库之类的库（不同数据库使用不同的库）
+   - pdo中尽量使用预处理减少注入
+   - pdo基本使用例子
+     #+BEGIN_SRC php
+       $driver = 'mysql';
+       $host = '127.0.0.1';
+       $port = 3306;
+       $db_name = 'db1';
+       $charset = 'utf8';
+       $username = 'root';
+       $password = '';
+       $dsn = "{$driver}:$host;port={$port};dbname={$db_name};charset=${charset}";
+       try {
+	   $pdo = new PDO($dsn, $username, $password);
+       //print_r($pdo);
+       //使用异常形式来提示错误
+	   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	   $sql = "insert into user (name ,password) values (:name, :password);";
+       //    使用预处理方式执行sql
+	   $sth = $pdo->prepare($sql);
+       //    会过滤一些字符串类似注入之类的
+	   $sth->bindValue(':name', '小李');
+	   $sth->bindValue(':password', 'hello');
+	   $sth->execute();
+	   var_dump('exec success');
+	   var_dump($pdo->lastInsertId('id'));
+	   $sql = "select * from user order by id desc limit 0, 1;";
+	   $data = $pdo->query($sql);
+	   var_dump($data->fetchAll(PDO::FETCH_ASSOC));
+       } catch (Exception $e) {
+	   print_r($e->getMessage());
+       //    var_dump($pdo->errorInfo());
+       //    var_dump($pdo->errorCode());
+       }
+     #+END_SRC
+** 表和Model类映射
+   - 数据库需要有对应字段的表
+   #+BEGIN_SRC php
+     namespace a;
 
+     use PDO;
+
+     class T1
+     {
+	 private $id;
+	 private $name;
+	 private $department;
+	 private $salary;
+	 private $age;
+
+	 public function __construct()
+	 {
+     //        修改列的显示
+	     $this->id = 'NO-' . $this->id;
+	 }
+
+	 public function __set($name, $value)
+	 {
+	     // TODO: Implement __set() method.
+	     $this->$name = $value;
+	 }
+
+	 public function __get($name)
+	 {
+	     // TODO: Implement __get() method.
+	     return $this->$name;
+	 }
+     }
+
+     $dsn = 'mysql:' .
+	 'localhost' .
+	 ';port=3306' .
+	 ';dbname=db1' .
+	 ';charset=utf8';
+     //实例化（连接）
+     $pdo = new PDO($dsn, 'root', '');
+     $stmt = $pdo->prepare('select * from t1');
+     if ($stmt->execute()) {
+	 $res = $stmt->fetchAll(PDO::FETCH_CLASS, T1::class);
+	 echo $res[0]->id . '-*-' . $res[0]->name . PHP_EOL;
+     } else {
+	 echo 'exe error' . PHP_EOL;
+     }
+   #+END_SRC
 * route
   一个自定义路由的小测试
   #+BEGIN_SRC php
@@ -827,4 +903,53 @@
      }
 
      echo $a;
+   #+END_SRC
+* 异常处理
+** 传统处理错误方式
+   die 提示错误（结束程序）
+** 使用异常类
+   #+BEGIN_SRC php
+     namespace e;
+
+     use Exception;
+
+     class MyException extends Exception
+     {
+	 public function __construct($message = "", $code = 0)
+	 {
+	     parent::__construct($message, $code);
+	 }
+
+     //    public function __toString()
+	 public function errorInfo()
+	 {
+	     return 'msg: ' .
+		 $this->getMessage()
+		 . PHP_EOL
+		 . 'code: '
+		 . $this->getCode()
+		 . PHP_EOL;
+	 }
+     }
+
+     namespace s;
+
+     use e\MyException;
+
+     function init()
+     {
+	 throw new MyException(__FILE__ . ' line: ' . __LINE__, 1100);
+     }
+
+     namespace r;
+
+     use s;
+     use e\MyException;
+
+     try {
+	 s\init();
+     } catch (MyException $e) {
+     //    echo $e . PHP_EOL;
+	 echo $e->errorInfo();
+     }
    #+END_SRC
