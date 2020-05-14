@@ -47,3 +47,12 @@
    | I see him in the street           | 我在街上看见他了       |
    | Look at that man. He is very busy | 看，那个人特别忙       |
    |-----------------------------------+------------------------|
+* 1
+** 11
+   |----------------------+-----------------------|
+   | Whose shirt is that? | 那是谁的衬衫          |
+   |                      | That is my shirt.     |
+   |                      | Is that my shirt?     |
+   |                      | That is not my short. |
+   |                      | Whose shirt is that?  |
+   |----------------------+-----------------------|

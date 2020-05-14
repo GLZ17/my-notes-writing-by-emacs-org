@@ -127,3 +127,41 @@
     - My book is on the table.
     - What is on the table?(主语 my book)
     - Where is my book?（宾语 on the table）
+* 名词所有格
+  加在名词后面
+** 分类
+   - 's
+   - of
+   - 双重所有格
+*** 's
+    - 名词's + 名词
+      |------------------+---------------------------|
+      | Mike's car       | This is Mike's car.       |
+      | Tom's watch      | That is Tom's watch.      |
+      | The boy's father | That is the boy's father. |
+      | Marry's dress    | This is Marry's dress.    |
+      | The bird's song  | That is the bird's song.  |
+      |------------------+---------------------------|
+    - 名词(s) 发音/ z /
+      两种写法都可以，是一样的，发音也一样
+      - 名词(s)'s + 名词
+      - 名词(s)' + 名词
+      |----------------+---------------|
+      | Tomas's book   | tomas' book   |
+      | Jones's car    | Jones' car    |
+      | Hopkins's bike | Hopkins' bike |
+      | James's coat   | James' coat   |
+      |----------------+---------------|
+    - 名词(s) 复数
+      名词(s)' + 名词
+      |----------------------------|
+      | The teachers' reading-room |
+      | The boys' teacher          |
+      | Ther birds' song           |
+      | The dogs' food             |
+      |----------------------------|
+    - 名词's + 名词（可省略）
+      |----------------------------+----------------------|
+      | This Shirt is Tim's shirt. | This shirt is Tim's. |
+      |                            | Is this shirt Tim's? |
+      |----------------------------+----------------------|

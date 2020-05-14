@@ -26,3 +26,13 @@
    - Tom之类的一般都是男的
 ** 注重发音
    听起来好就可以
+* 说话名称和事情的顺序
+  一般名字放在最后，事情放在前面
+  |---------------------------|
+  | Is this your shirt, Dave? |
+  | Good morning, Mr.Blake.   |
+  | Hello, Bill.              |
+  | How are you, Tom?         |
+  | Excuse me, sir.           |
+  |---------------------------|
+* 

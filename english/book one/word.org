@@ -148,9 +148,9 @@
 ** 10
    |-------+-----------------------+--------------------------|
    | fat   | adj.                  | 胖的                     |
+   | thin  | adj.                  | 瘦的                     |
    | woman | n.                    | 女人                     |
    |       | lady                  | 女士（文明场合使用）     |
-   | thin  | adj.                  | 瘦的                     |
    | tall  | adj.                  | 高的（人的个子、建筑等） |
    | short | adj.                  | 矮的                     |
    | dirty | adj.                  | 脏的                     |
@@ -173,3 +173,41 @@
    |       | He is very busy       | 他特别的忙               |
    | lazy  | adj.                  | 懒的                     |
    |-------+-----------------------+--------------------------|
+** 11
+   |---------+--------------------+----------------|
+   | whose   | pron.              | 谁的           |
+   |         | Whose pen is that? | 那是谁的钢笔？ |
+   | blue    | adj.               | 蓝色的         |
+   | white   | adj.               | 白色的         |
+   |         | snow white         | 白雪公主       |
+   |         | the White House    | 白宫           |
+   | perhaps | adv.               | 大概           |
+   |         | perhaps so         | 也许会         |
+   |         | perhaps not        | 也许不会       |
+   | catch   | v.                 | 抓住           |
+   |         | catch the fish     | 捕鱼           |
+   |         | catch the thief    | 抓小偷         |
+   |---------+--------------------+----------------|
+** 12
+   |---------+--------------------+----------------|
+   | father  | n.                 | 父亲           |
+   |         | dad                | 口语           |
+   |         | daddy              | 儿语           |
+   | mother  | n.                 | 母亲           |
+   |         | mum                | 口语（英）     |
+   |         | mom                | 口语（美）     |
+   |         | mummy              | 儿语           |
+   | sister  | n.                 | 姐妹           |
+   | brother | n.                 | 兄弟           |
+   |         | stepfather         | 继父           |
+   |         | stepmother         | 继母           |
+   |         | stepsister         | 异父或异母     |
+   |         | stepbrother        | 异父或异母     |
+   |         | stedaughter        | 养女           |
+   |         | stepson            | 养子           |
+   | tie     | n.                 | 领带           |
+   | blouse  | n.                 | 女衬衫         |
+   | his     | adj.               | 他的           |
+   |         | This is my father. | 这是我的父亲。 |
+   | her     | adj.               | 她的           |
+   |---------+--------------------+----------------|
