@@ -1,0 +1,8 @@
+* composer 创建项目
+  - 5.8最新版
+  - 目录名称为 to
+  #+BEGIN_SRC shell
+    composer create-project laravel/laravel to 5.8.*
+  #+END_SRC
+* composer 之后403
+  注释虚拟主机配置中的：#Options Indexes 会影响laravel访问（403）

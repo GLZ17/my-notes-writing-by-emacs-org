@@ -70,3 +70,12 @@ b     - looks中theme选dracula, transparent选low, cursor选block
    - 参考 https://github.com/skywind3000/z.lua/issues/63
    - 下载编译好的文件（讨论中有编译好的文件包）
    - 拷贝可执行文件（lua.exe, luac.exe）
+** composer(php)
+   - composer.bat 同路径下创建composer文件
+   - 文件内容如下
+     #+BEGIN_SRC sh
+       #!/usr/bin/env sh
+
+       # php /path/to/composer.phar $*
+       php `dirname $0`/composer.phar $*
+     #+END_SRC

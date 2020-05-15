@@ -31,4 +31,5 @@
   打包下载创建命令
   #+BEGIN_SRC shell
     composer create-project --prefer-dist topthink/think tp-name
+    composer create-project laravel/laravel to 5.8.*
   #+END_SRC

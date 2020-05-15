@@ -134,7 +134,12 @@
     调换 键Left-Ctrl 和 键Caps Lock 的位置，需要重启系统生效
 *** firefox
     下载安装，登录账号（获取之前的书签和扩展）
-
+*** textlive
+    - 下载地址
+      - 上海镜像->ctan->/systems/texlive/Images/
+      - 清华镜像->/CTAN/systems/texlive/Images/
+    - 卸载批处理
+      C:\texlive\2020\tlpkg\installer\uninst.bat
 ** 设置中文/非中文输入法快捷键（超级巨坑）
 *** 控制面板中的相关设置
     1. 选择 时间和语言-语言
@@ -161,6 +166,7 @@
    为了使用Ctrl+SPC，不能用Windows10自带的输入法
    - QQ拼音
    - QQ五笔（正在练习使用中）
+
 * vmware
 
 ** 环境
