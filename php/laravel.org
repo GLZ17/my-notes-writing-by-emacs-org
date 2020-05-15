@@ -1,8 +1,28 @@
-* composer 创建项目
-  - 5.8最新版
-  - 目录名称为 to
-  #+BEGIN_SRC shell
-    composer create-project laravel/laravel to 5.8.*
-  #+END_SRC
-* composer 之后403
-  注释虚拟主机配置中的：#Options Indexes 会影响laravel访问（403）
+* composer
+  - 创建项目
+    - 5.8最新版
+    - 目录名称为 to
+    #+BEGIN_SRC shell
+      composer create-project laravel/laravel to 5.8.*
+    #+END_SRC
+  - 访问 403
+    - 设置虚拟主机
+    - 注释（也可以省略）: Options Indexes
+    #+BEGIN_SRC conf
+      <VirtualHost *:80>
+	ServerName www.to.cn
+	ErrorLog "${INSTALL_DIR}/www/logs/error.log"
+	CustomLog "${INSTALL_DIR}/www/logs/access.log" combined
+	DocumentRoot "${INSTALL_DIR}/www/to/public/"
+	<Directory "${INSTALL_DIR}/www/to/public/">
+	  #下面这句经测试使用laravel会影响访问（403）
+	  #所以注释掉
+	  #Options Indexes
+	  AllowOverride All
+	  Require all granted
+	</Directory>
+	DirectoryIndex index.php
+      </VirtualHost>
+    #+END_SRC
+
+  

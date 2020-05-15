@@ -108,25 +108,33 @@
     - 动词 + 主语 + 其他成分？
 *** 例子
     - Sophie is a new student.
-    - Is Sophie a new student?
+      - Is Sophie a new student?
     - I am French.
-    - Are you French?
+      - Are you French?
 ** 特殊疑问句句式
+** 语序
+   特殊疑问词 + be n.
 *** 特征
     - wh question
     - 不但能直接用yes no来回答
     - how what who whose which why when where 引领特殊疑问句
+*** 基本步骤
+    1. 找到肯定句中被提问的部分（句子中那个信息是未知部分）
+    2. 根据句意选择最合适的特殊疑问词
+    3. 将特殊疑问词置首
+    4. 该特殊疑问句不针对肯定句的主语提问时，动词放在主语前（动词提前），否则动词不提前(针对主语提问)
 *** 例子
     - Your name is Bob.
-      1. 找到肯定句中被提问的部分（句子中那个信息是未知部分）
-      2. 根据句意选择最合适的特殊疑问词
-      3. 将特殊疑问词置首
-      4. 该特殊疑问句不针对肯定句的主语提问时，动词放在主语前（动词提前），否则动词不提前(针对主语提问)
-    - What is your name?
-    - Who is Bob?
+      - What is your name?
+      - Who is Bob?
     - My book is on the table.
-    - What is on the table?(主语 my book)
-    - Where is my book?（宾语 on the table）
+      - What is on the table?(主语 my book)
+      - Where is my book?（宾语 on the table）
+    - 语序
+      - What is your name?
+      - What is your job?
+      - What color is your coat?
+
 * 名词所有格
   加在名词后面
 ** 分类
