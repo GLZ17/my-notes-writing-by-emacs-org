@@ -953,3 +953,24 @@
 	 echo $e->errorInfo();
      }
    #+END_SRC
+* 正则表达式
+  preg:_ 开始的函数
+  #+BEGIN_SRC php
+    //值匹配一次，第三个参数保存结果
+    preg_match('/a/i', 'AaA', $ret);
+    print_r($ret);
+    //类似'/a/ig'效果
+    preg_match_all('/a/i', 'AaA', $ret);
+    print_r($ret);
+  #+END_SRC
+* 接口  
+  - php 类与类之间的接口
+  - api 接口
+    - 给小程序、app使用
+    - 还可以给其它平台的php， 鞭它语言 python java
+  - 一般使用json格式
+  #+BEGIN_SRC php
+    $json = json_encode([1 => 'a']);
+    echo $json . PHP_EOL;
+    print_r(json_decode($json, true));
+  #+END_SRC

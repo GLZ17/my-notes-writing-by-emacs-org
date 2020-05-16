@@ -25,4 +25,96 @@
       </VirtualHost>
     #+END_SRC
 
-  
+* 项目结构
+  - app
+   当前应用相关的内容（很重要 90%），控制器(http)、中间件、服务提供者等
+  - config
+    配置文件，各种配置
+  - database
+    数据库相关的
+  - public
+    网站根目录，入口，一般不要修改（避免一些莫名其妙的情况）
+  - resources
+    资源 js css sass views
+  - routes
+    路由
+  - storage
+    存储，缓存，提升一点性能
+  - test
+    测试，修改源码需要修改，违背快速开发，就没有优势了，大型严谨的项目可能会需要
+  - vendor
+    laravel 核心，运行的依赖
+    - .env
+      配置文件，包含各种配置信息（如数据库连接配置）
+    - artisan
+      实例化应用， 也可用于shell cmd
+  - bootstrap
+    不是前端框架，名字相同纯属巧合
+
+* 路由
+  routes目录
+  - 参数形式
+    - 闭包（函数），执行函数
+    - 字符串，映射控制器
+  - 没有pathinfo（路径方式找文件）方式
+  - 所有路由都要写一个（比较烦）
+  #+BEGIN_SRC php
+    Route::get('/', function () {
+	return view('welcome');
+    });
+    Route::get('/home', 'home@index');
+  #+END_SRC
+
+* 控制器
+** 创建控制器
+   - 路径
+     App/Http/Controllers
+   - 方式
+     - 手动新建文件（文件名称和类名称要一致）
+     - shell cmd
+       #+BEGIN_SRC shell
+	 php artisan make:controller Test
+       #+END_SRC
+   - 例子
+     #+BEGIN_SRC php
+       namespace App\Http\Controllers;
+
+       use Illuminate\Http\Request;
+       use App\Models\T1;
+       class Test extends Controller
+       {
+	   public function index(T1 $db)
+	   {
+	       print_r($db->gg());
+	   }
+       }
+     #+END_SRC
+
+* 模型
+** 创建模型  
+   - 路径
+     App/Models
+   - 方式
+     - 手动新建文件（文件名称和类名称要一致）
+     - shell cmd
+       模型名称包含路径
+       #+BEGIN_SRC shell
+	 php artisan make:model Models/T
+       #+END_SRC
+   - 例子
+     #+BEGIN_SRC php
+       namespace App\Models;
+
+       use Illuminate\Database\Eloquent\Model;
+
+       class T1 extends Model
+       {
+	   protected $table = 't1';
+	   protected $primaryKey = 'id';
+
+	   public function gg()
+	   {
+	       return $this->get()->toArray();
+	   }
+       }
+     #+END_SRC
