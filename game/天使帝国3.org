@@ -1,0 +1,52 @@
+#+BEGIN_SRC php
+  $data = [
+      [
+	  10920, 10920, 1755, 1755, 0, 1100
+      ],
+  //    [
+  //        4202, 4202, 2603, 2603, 20, 640
+  //    ],
+  //    [
+  //        1865, 1865, 1035, 1060, 93, 350
+  //    ],
+  ];
+
+  function toValues($dec, $len = 4)
+  {
+      $values = [];
+      while ($dec > 0) {
+	  $values[] = $dec % 256;
+	  $dec = floor($dec / 256);
+      }
+      $len -= count($values);
+      while (--$len >= 0) {
+	  $values[] = 0;
+      }
+      return $values;
+  }
+
+  function toHex($values)
+  {
+      $res = [];
+      foreach ($values as $v) {
+	  $val = dechex($v) . '';
+	  if ($v < 16) {
+	      $val = '0' . $val;
+	  }
+	  $res[] = $val;
+      }
+      return $res;
+  }
+
+  foreach ($data as $item) {
+      list($rhp, $mhp, $rmp, $mmp, $exp, $up) = $item;
+      $arr = array_merge(
+	  toHex(toValues($up - $exp)),
+	  toHex(toValues($mhp)),
+	  toHex(toValues($rhp)),
+	  toHex(toValues($mmp)),
+	  toHex(toValues($rmp)),
+      );
+      echo implode(' ', $arr) . PHP_EOL;
+  }
+#+END_SRC

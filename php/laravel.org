@@ -1,9 +1,9 @@
 * composer
   - 创建项目
-    - 5.8最新版
+    - 6.x最新版
     - 目录名称为 to
     #+BEGIN_SRC shell
-      composer create-project laravel/laravel to 5.8.*
+      composer create-project --prefer-dist laravel/laravel to "6.*"
     #+END_SRC
   - 访问 403
     - 设置虚拟主机
@@ -24,6 +24,7 @@
 	DirectoryIndex index.php
       </VirtualHost>
     #+END_SRC
+
 
 * 项目结构
   - app
@@ -53,6 +54,38 @@
 
 * 路由
   routes/web.php文件
+** verbs
+   最后一个匹配到的路由有效
+   #+BEGIN_SRC php
+     // <?php echo csrf_field(); ?>
+     // test.blade.php
+     <form method="post">
+	 <input type="submit" value="post提交"/>
+	 @csrf
+     </form>
+     <form method="post">
+	 <input type="submit" value="put提交"/>
+	 @method('put')
+	 @csrf
+     </form>
+     <form method="post">
+	 <input type="submit" value="delete提交"/>
+	 @method('delete')
+	 @csrf
+     </form>
+     <form method="post">
+	 <input type="submit" value="options提交"/>
+	 @method('options')
+     </form>
+
+     // web.php
+     Route::any('/t', $fnRoute);
+     Route::match(['put'], '/t', $fnRoute);
+     Route::options('/t', $fnRoute);
+     Route::get('/t', function (){
+	 return view('test');
+     });
+   #+END_SRC
 ** 响应方式
    - 闭包（匿名函数）
      #+BEGIN_SRC php
@@ -158,6 +191,21 @@
 	   ->post()->print()
 	   ->get()->print();
      #+END_SRC
+** 参数
+   #+BEGIN_SRC php
+     //    /a/xx/b/xx
+     Route::get('/a/{aid}/b/{bid}', function ($aid, $bid) {
+	 return $aid . '---' . $bid;
+     });
+     //    /a/ and /a and /a/xx
+     Route::get('/a/{name?}', function ($name = 'admin') {
+	 return $name;
+     });
+     //    /b/\d+/\w+
+     Route::get('/b/{aid}/{bid}', function ($aid, $bid) {
+	 return $aid . '---' . $bid;
+     })->where(['aid' => '\d+', 'bid'=>'\w+']);
+   #+END_SRC
 * 控制器
 ** 创建控制器
    - 路径

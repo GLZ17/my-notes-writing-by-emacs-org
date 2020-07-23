@@ -74,3 +74,9 @@
 * 显示隐藏参数提示
   1. settings->editor->inlay hints
   2. 选择对应的语言勾选即可
+
+* 没有文件类型提示
+  以text文件处理为例（主要也是这个类型的问题）
+  1. settings->editor->file types
+  2. 上边窗口选text文件
+  3. 下边窗口移除对应的文件
