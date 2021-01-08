@@ -1,4 +1,5 @@
 #+BEGIN_SRC php
+  <?php
 
   //exp
   //"desmume-0.9.9-JIT-x86-2013-02-18.exe"+2F58C22
@@ -6,7 +7,7 @@
   //"desmume-0.9.9-JIT-x86-2013-02-18.exe"+2F58D6A
   $data = [
       [
-	  282, 17
+	  192, 39
       ],
   //    [
   //        4202, 4202, 2603, 2603, 20, 640
@@ -68,7 +69,7 @@
 
   RRR;
 
-      file_put_contents('../game.xml', $str_file);
+      file_put_contents('./game.xml', $str_file);
   }
 
   function initItems($total)
@@ -79,6 +80,11 @@
       $base_hp = hexdec('0x' . explode('+', $hp)[1]);
       $base_exp = hexdec('0x' . explode('+', $exp)[1]);
       $res = [];
+  //    for ($i = 0; $i < $total; ++$i) {
+  //        $res[] = fillItem(count($res) + 1,
+  //            ($i + 1) . '--hit',
+  //            $base_exp + $diff_role * $i + 16, 1);
+  //    }
       for ($i = 0; $i < $total; ++$i) {
 	  $res[] = fillItem(count($res) + 1,
 	      ($i + 1) . '--move',
@@ -100,6 +106,12 @@
 	      $base_hp + $diff_role * $i, 2);
       }
       $res[] = fillItem(count($res) + 1, 'pt-number', 0x2F53ED8, 1);
+      $res[] = fillItem(count($res) + 1, 'goods-list', 0x2f4f1bc, 1);
+  //    $res[] = fillItem(count($res) + 1, 'job-level-1', 0x2f4f165, 1);
+      for ($i = 0; $i < 17; ++$i) {
+	  $res[] = fillItem(count($res) + 1,
+	      ($i + 1) . '--job-level', 0x2f4f165 + $i, 1);
+      }
       return $res;
   }
 
@@ -118,5 +130,14 @@
 
   }
 
-  writeFile(5);
+  writeFile(6);
+
+
+
+  //$s = 0x03358c35;
+  //$o =  0x2F58C35;
+  //$j = 0x0334F165;
+  //$v = $j-($s-$o);
+  //echo dechex($v);
+  //0x0334F165 job1
 #+END_SRC
