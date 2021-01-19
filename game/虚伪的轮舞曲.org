@@ -130,7 +130,7 @@
 
   }
 
-  writeFile(6);
+  writeFile(1);
 
 
 

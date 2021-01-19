@@ -1,0 +1,103 @@
+#+BEGIN_SRC php
+  <?php
+
+
+  function toValues($dec, $len = 2)
+  {
+      $values = [];
+      while ($dec > 0) {
+	  $values[] = $dec % 256;
+	  $dec = floor($dec / 256);
+      }
+      $len -= count($values);
+      while (--$len >= 0) {
+	  $values[] = 0;
+      }
+      return $values;
+  }
+
+  function toHex($values)
+  {
+      $res = [];
+      foreach ($values as $v) {
+	  $val = dechex($v) . '';
+	  if ($v < 16) {
+	      $val = '0' . $val;
+	  }
+	  $res[] = $val;
+      }
+      return $res;
+  }
+
+
+  function writeFile($total)
+  {
+      $str_items = implode("\n", initItems($total));
+      $str_file = <<<"RRR"
+  <?xml version="1.0" encoding="utf-8"?>
+  <CheatTable CheatEngineTableVersion="29">
+    <CheatEntries>
+    {$str_items}
+    </CheatEntries>
+    <UserdefinedSymbols/>
+  </CheatTable>
+
+  RRR;
+
+      file_put_contents('./game.xml', $str_file);
+  }
+
+  function combine(&$res, &$addr, $b, $size, $num)
+  {
+      foreach ($b as $k => $v) {
+	  for ($i = 0; $i < $num; ++$i) {
+	      $res[] = fillItem(count($res) + 1,
+		  ($i + 1) . '--' . $k,
+		  $v + $addr[$i], $size);
+	  }
+      }
+  }
+
+  function initItems($total)
+  {
+      $hp_str = [
+	  'VirtuaNES.exe+158414'
+      ];
+      $hp_values = [];
+      foreach ($hp_str as $v) {
+	  $hp_values[] = hexdec('0x' . explode('+', $v)[1]);
+      }
+      $res = [];
+      combine($res, $hp_values, ['exp' => -12], 4, $total);
+      combine($res, $hp_values, ['level' => -16], 1, $total);
+      combine($res, $hp_values, ['status' => 48], 1, $total);
+      combine($res, $hp_values, ['hp' => 8], 2, $total);
+      return $res;
+  }
+
+  function fillItem($id, $desc, $addr, $bytes)
+  {
+      $bytes = $bytes === 1 ? 'Byte' : $bytes . ' Bytes';
+      $addr = strtoupper(dechex($addr));
+      return <<<"AAA"
+  <CheatEntry>
+	<ID>{$id}</ID>
+	<Description>"{$desc}"</Description>
+	<VariableType>{$bytes}</VariableType>
+	<Address>"VirtuaNES.exe"+{$addr}</Address>
+      </CheatEntry>
+  AAA;
+
+  }
+
+  writeFile(1);
+
+
+
+  //$s = 0x03358c35;
+  //$o =  0x2F58C35;
+  //$j = 0x0334F165;
+  //$v = $j-($s-$o);
+  //echo dechex($v);
+  //0x0334F165 job1
+#+END_SRC
